@@ -1,38 +1,71 @@
 {% extends 'blog/base.html' %}
 
 {% block content %}
-    <div class="post">
-        {% if post.published_date %}
-            <div class="date">
-                {{ post.published_date }}
+
+    <header class="masthead" style="background-image: url('../../../static/img/editing.jpg')">
+        <div class="overlay"></div>
+        <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+                <div class="post-heading">
+                <h1>{{ post.title }}</h1>
+                <span class="meta">Posted by
+                    <a href="https://twitter.com/robj3d3">{{ post.author }}</a>
+                    on {{ post.published_date}}</span>
+                </div>
+                <!-- <span class="subheading">Want to make a change? It's on you to do it.</span> ADD SUBTITLE TO FORM? AND IMAGE?-->
+                </div>
             </div>
-        {% else %}
-            <a class="btn btn-default" href="{% url 'post_publish' pk=post.pk %}">Publish</a>
-        {% endif %}
-        {% if user.is_authenticated %}
-            <a class="btn btn-default" href="{% url 'post_edit' pk=post.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
-            <a class="btn btn-default" href="{% url 'post_remove' pk=post.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
-        {% endif %}
-        <h2>{{ post.title }}</h2>
-        <p>{{ post.text|linebreaksbr }}</p>
-    </div>
-    <hr>
-    <a class="btn btn-default" href="{% url 'add_comment_to_post' pk=post.pk %}">Add comment</a>
-    {% for comment in post.comments.all %}
-        {% if user.is_authenticated or comment.approved_comment %}
-        <div class="comment">
-            <div class="date">
-                {{ comment.created_date }}
-                {% if not comment.approved_comment %}
-                    <a class="btn btn-default" href="{% url 'comment_remove' pk=comment.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
-                    <a class="btn btn-default" href="{% url 'comment_approve' pk=comment.pk %}"><span class="glyphicon glyphicon-ok"></span></a>
-                {% endif %}
-            </div>
-            <strong>{{ comment.author }}</strong>
-            <p>{{ comment.text|linebreaks }}</p></div>
         </div>
-        {% endif %}
-    {% empty %}
-        <p>No comments here yet :(</p>
-    {% endfor %}
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+                <div class="post">
+                    {% if user.is_authenticated %}
+                        <a class="btn btn-default" style="margin-left: -25px" href="{% url 'post_edit' pk=post.pk %}">Edit</a>
+                        <a class="btn btn-default" style="margin-left: 0" href="{% url 'post_remove' pk=post.pk %}">Delete</a>
+                    {% endif %}
+                    {% if post.published_date %}
+                    {% else %}
+                        <a class="btn btn-default" href="{% url 'post_publish' pk=post.pk %}">Publish</a>
+                    {% endif %}
+                    <p id="post-text">{{ post.text|linebreaksbr }}</p>
+                </div>
+                <hr>
+                <br>
+                <br>
+            </div>
+        </div>
+    </div>
+            
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+                <a class="btn btn-default" style="margin-left: -25px" href="{% url 'add_comment_to_post' pk=post.pk %}">Add comment</a>
+                <hr>
+                {% for comment in post.comments.all %}
+                    {% if user.is_authenticated or comment.approved_comment %}
+                    <div class="comment">
+                        <div style="font-size: 13pt;" class="date">
+                            {{ comment.created_date }}
+                            {% if not comment.approved_comment %}
+                                <a class="btn btn-default" href="{% url 'comment_remove' pk=comment.pk %}">Remove</a>
+                                <a class="btn btn-default" href="{% url 'comment_approve' pk=comment.pk %}">Approve</a>
+                            {% endif %}
+                        </div>
+                        <h5 style="margin-top: 3.5%;">{{ comment.author }}</h5>
+                        <p style="margin-top: -20px;">{{ comment.text|linebreaks }}</p>
+                        <hr>
+                    </div>
+                    {% endif %}
+                {% empty %}
+                    <p style="margin-left: -3%; font-size: 12pt;">No comments here yet :(</p>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+            
 {% endblock %}

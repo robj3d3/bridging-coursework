@@ -1,11 +1,35 @@
 {% extends 'blog/base.html' %}
 
 {% block content %}
-    {% for post in posts %}
-        <div class="post">
-            <p class="date">created: {{ post.created_date|date:'d-m-Y' }}</p>
-            <h2><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
-            <p>{{ post.text|truncatechars:200 }}</p>
+
+    <header class="masthead" style="background-image: url('../static/img/drafts.jpg')">
+        <div class="overlay"></div>
+        <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+                <div class="page-heading">
+                <h1>Post Drafts</h1>
+                <span class="subheading">Afraid to publish? Don't be.</span>
+                </div>
+            </div>
         </div>
-    {% endfor %}
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+                {% for post in posts %}
+                    <div class="post">
+                        <p class="date">created: {{ post.created_date|date:'d-m-Y' }}</p>
+                        <h2><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
+                        <p>{{ post.text|truncatechars:200 }}</p>
+                    </div>
+                {% empty %}
+                    <p>No draft posts!</p>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
 {% endblock %}

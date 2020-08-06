@@ -1,9 +1,30 @@
 {% extends 'blog/base.html' %}
 
 {% block content %}
-    <h1>New comment</h1>
-    <form method="POST" class="post-form">{% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="save btn btn-default">Send</button>
-    </form>
+    <!-- Page Header -->
+    <header class="masthead" style="background-image: url('../../../static/img/commenting.jpg')">
+        <div class="overlay"></div>
+        <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+                <div class="site-heading">
+                <h1>Write a comment</h1>
+                <span class="subheading">{{ post.title }} by {{ post.author }}</span>
+                </div>
+            </div>
+        </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+                <h1>New comment</h1>
+                <form method="POST" class="post-form">{% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit" class="save btn btn-default">Send</button>
+                </form>
+            </div>
+        </div>
+    </div>
 {% endblock %}

@@ -26,7 +26,7 @@
                         <p>published: {{ post.published_date }}</p>
                     </div>
                     <h2><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h2>
-                    <p id="post-text">{{ post.text|linebreaksbr|truncatechars:200 }}</p>
+                    <p style="line-height: 21px;" id="post-text">{{ post.text|linebreaksbr|truncatechars:200 }}</p>
                     <a href="{% url 'post_detail' pk=post.pk %}" id="comments">(Comments: {{ post.approved_comments.count }})</a>
                 </div>
                 <hr>

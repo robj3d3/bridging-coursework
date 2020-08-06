@@ -2,7 +2,16 @@
 
 {% block content %}
 
-    <header class="masthead" style="background-image: url('../../../static/img/editing.jpg')">
+    <!-- Manual custom blog pics -->
+    {% if post.pk == 1 %}
+        <header class="masthead" style="background-image: url('../../../static/img/django-and-site-structure.jpg')">
+    {% elif post.pk == 2 %}
+        <header class="masthead" style="background-image: url('../../../static/img/looking-ahead.jpg')">
+    {% elif post.pk == 3 %}
+        <header class="masthead" style="background-image: url('../../../static/img/first-year.jpg')">
+    {% else %}
+        <header class="masthead" style="background-image: url('../../../static/img/editing.jpg')">
+    {% endif %}
         <div class="overlay"></div>
         <div class="container">
         <div class="row">

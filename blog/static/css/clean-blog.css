@@ -140,6 +140,7 @@ img::-moz-selection {
     transition: background-color 0.2s;
     /* Force Hardware Acceleration in WebKit */
     transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
   }
   #mainNav.is-fixed {

@@ -59,3 +59,31 @@ a {
 .comment {
     width: 100%;
 }
+
+#main { 
+    animation: fadeInAnimation ease 1.5s; 
+    animation-iteration-count: 1; 
+    animation-fill-mode: forwards; 
+        -webkit-animation: fadeInAnimation ease 1.5s; 
+        -webkit-animation-iteration-count: 1; 
+        -webkit-animation-fill-mode: forwards; 
+            -moz-animation: fadeInAnimation ease 1.5s; 
+            -moz-animation-iteration-count: 1; 
+            -moz-animation-fill-mode: forwards; 
+                -o-animation: fadeInAnimation ease 1.5s; 
+                -o-animation-iteration-count: 1; 
+                -o-animation-fill-mode: forwards; 
+} 
+  
+@keyframes fadeInAnimation { 
+    0% {
+        opacity: 0;
+        transform: translateY(15px);
+            -webkit-transform: translateY(15px);
+                -moz-transform: translateY(15px);
+                    -o-transform: translateY(15px);
+    }
+    100% { 
+        opacity: 1;
+     } 
+} 
